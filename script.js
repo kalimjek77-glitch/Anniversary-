@@ -1,110 +1,103 @@
+// ===============================
+// LOVE ARCADE - PART 1
+// ===============================
+
 // Loading Screen
-setTimeout(() => {
-    document.getElementById("loading").classList.add("hidden");
-    document.getElementById("quiz").classList.remove("hidden");
-}, 2500);
+window.onload = function () {
+    setTimeout(() => {
+        document.getElementById("loading").classList.add("hidden");
+        document.getElementById("quiz").classList.remove("hidden");
+    }, 2500);
+};
 
-// Quiz Checker
-function checkAnswer(){
+// Quiz Validation
+function checkAnswer() {
 
-const first=document.getElementById("fname").value.trim().toLowerCase();
-const middle=document.getElementById("mname").value.trim().toLowerCase();
-const last=document.getElementById("lname").value.trim().toLowerCase();
+    const first = document.getElementById("fname").value.trim().toLowerCase();
+    const middle = document.getElementById("mname").value.trim().toLowerCase();
+    const last = document.getElementById("lname").value.trim().toLowerCase();
 
-const result=document.getElementById("result");
+    const result = document.getElementById("result");
 
-if(
-(first==="april joy"||first==="april") &&
-middle==="esperila" &&
-last==="contiga"
-){
+    if (
+        (first === "april joy" || first === "april") &&
+        middle === "esperila" &&
+        last === "contiga"
+    ) {
 
-result.style.color="#7CFC00";
-result.innerHTML="❤️ Correct! Welcome My Love ❤️";
+        result.style.color = "#00ff99";
+        result.innerHTML = "❤️ Correct! Access Granted ❤️";
 
-setTimeout(()=>{
+        launchConfetti();
 
-document.getElementById("quiz").classList.add("hidden");
-document.getElementById("bouquetPage").classList.remove("hidden");
+        setTimeout(() => {
+            document.getElementById("quiz").classList.add("hidden");
+            document.getElementById("bouquetPage").classList.remove("hidden");
+        }, 1500);
 
-},1500);
+    } else {
 
-}else{
+        result.style.color = "#ff5555";
+        result.innerHTML = "❌ Wrong Answer<br>Hint: She's your forever love ❤️";
 
-result.style.color="#ff6961";
-result.innerHTML="❌ Wrong Answer.<br>Hint: She's the love of my life ❤️";
-
-}
-
-}
-
-// Bouquet Click
-function openLetter(){
-
-document.getElementById("bouquetPage").classList.add("hidden");
-
-document.getElementById("letter").classList.remove("hidden");
-
-// Play Music
-document.getElementById("bgmusic").play();
-
-typeMessage();
+    }
 
 }
 
-// Typing Effect
+// Open Love Letter
+function openLetter() {
 
-const message=`Dear April Joy Esperila Contiga,
+    document.getElementById("bouquetPage").classList.add("hidden");
+
+    document.getElementById("letter").classList.remove("hidden");
+
+    document.getElementById("footer").classList.remove("hidden");
+
+    document.getElementById("bgmusic").play();
+
+    typeWriter();
+
+}
+
+// Anniversary Message
+const text = `Dear April Joy Esperila Contiga,
 
 Happy 4th Anniversary, My Love! ❤️
 
-Thank you for staying with me through every smile, every challenge, and every dream.
+Four amazing years have passed, and every day with you is still my favorite.
 
-You are my greatest blessing, my peace, and the most beautiful person in my life.
+Thank you for staying beside me through every challenge, every success, every smile, and every dream.
 
-No matter what happens, I will always choose you, love you, and cherish you.
+You are my greatest blessing, my peace, my happiness, and the love of my life.
 
-I promise to continue loving you with all my heart today, tomorrow, and forever.
+No matter what happens, I will always choose you.
 
-I love you so much. ❤️
+I promise to love you today, tomorrow, and forever.
+
+I love you so much.
+
+Happy 4th Anniversary, Mahal! ❤️
 
 Forever Yours,
+
 Jojo ❤️`;
 
-let index=0;
+let i = 0;
 
-function typeMessage(){
+// Typing Animation
+function typeWriter() {
 
-const area=document.getElementById("typing");
+    if (i < text.length) {
 
-function type(){
+        document.getElementById("typing").innerHTML += text.charAt(i);
 
-if(index<message.length){
+        i++;
 
-area.innerHTML+=message.charAt(index);
+        setTimeout(typeWriter, 35);
 
-index++;
-
-setTimeout(type,35);
-
-}
+    }
 
 }
-
-type();
-
-}
-
-// Floating Hearts
-
-setInterval(()=>{
-
-const heart=document.createElement("div");
-
-heart.className="heart";
-
-heart.innerHTML="❤️";
-
 heart.style.left=Math.random()*100+"vw";
 
 heart.style.fontSize=(20+Math.random()*25)+"px";
@@ -118,3 +111,102 @@ heart.remove();
 },8000);
 
 },400);
+
+// ===============================
+// LOVE ARCADE - PART 2
+// ===============================
+
+// Floating Hearts
+setInterval(() => {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    const hearts = ["❤️","💖","💕","💗","💘"];
+
+    heart.innerHTML = hearts[Math.floor(Math.random()*hearts.length)];
+
+    heart.style.left = Math.random()*100 + "vw";
+
+    heart.style.fontSize = (18 + Math.random()*25) + "px";
+
+    heart.style.animationDuration = (5 + Math.random()*4) + "s";
+
+    document.getElementById("hearts").appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },9000);
+
+},400);
+
+
+// Confetti
+function launchConfetti(){
+
+    const container=document.getElementById("confetti");
+
+    for(let i=0;i<120;i++){
+
+        const piece=document.createElement("div");
+
+        piece.className="confetti";
+
+        piece.style.left=Math.random()*100+"vw";
+
+        piece.style.animationDuration=(2+Math.random()*2)+"s";
+
+        piece.style.background=
+        `hsl(${Math.random()*360},100%,60%)`;
+
+        piece.style.transform=
+        `rotate(${Math.random()*360}deg)`;
+
+        container.appendChild(piece);
+
+        setTimeout(()=>{
+            piece.remove();
+        },4500);
+
+    }
+
+}
+
+
+// Small Sparkle Effect
+setInterval(()=>{
+
+    document.body.animate([
+        {filter:"brightness(1)"},
+        {filter:"brightness(1.04)"},
+        {filter:"brightness(1)"}
+    ],{
+        duration:1000
+    });
+
+},5000);
+
+
+// Prevent music autoplay error
+document.addEventListener("click",()=>{
+
+    const music=document.getElementById("bgmusic");
+
+    if(music.paused){
+
+        music.play().catch(()=>{});
+
+    }
+
+},{once:true});
+
+
+// Console Love Message
+console.clear();
+
+console.log("%c❤️ Happy 4th Anniversary ❤️",
+"color:#ff4d6d;font-size:28px;font-weight:bold;");
+
+console.log("%cI Love You April Joy Esperila Contiga ❤️",
+"color:pink;font-size:18px;");
