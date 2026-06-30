@@ -1,3 +1,7 @@
+/* ===========================
+   LOVE ARCADE STYLE - PART 1
+=========================== */
+
 *{
 margin:0;
 padding:0;
@@ -5,207 +9,569 @@ box-sizing:border-box;
 font-family:'Poppins',sans-serif;
 }
 
-body{
+html,body{
+width:100%;
+height:100%;
+overflow:hidden;
 background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
 color:#fff;
-overflow:hidden;
+}
+
+body{
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
+position:relative;
 }
 
-.hidden{
-display:none;
+/* Floating Hearts */
+
+#hearts{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+overflow:hidden;
+z-index:1;
 }
 
-#loading,
-#quiz,
-#bouquetPage,
-#letter{
+.heart{
+position:absolute;
+bottom:-40px;
+animation:rise linear forwards;
+opacity:.9;
+}
+
+@keyframes rise{
+
+0%{
+transform:translateY(0) scale(.5);
+opacity:0;
+}
+
+20%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-110vh) scale(1.3);
+opacity:0;
+}
+
+}
+
+/* Loading Screen */
+
+#loading{
+
 position:absolute;
 width:100%;
 height:100%;
 display:flex;
-flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:25px;
+background:#0f172a;
+z-index:999;
+}
+
+.loader{
+width:90%;
+max-width:350px;
 text-align:center;
 }
 
-#loading h1{
-font-size:45px;
+.loader h1{
+font-size:40px;
 color:#ff4d6d;
+margin-bottom:15px;
 animation:pulse 1s infinite;
 }
 
-#loading p{
-margin-top:15px;
+.loader p{
 color:#ccc;
+margin-bottom:20px;
 }
 
-#quiz h2{
-font-size:32px;
-color:#ff7aa2;
+.loading-bar{
+
+width:100%;
+height:10px;
+background:#ffffff20;
+border-radius:20px;
+overflow:hidden;
+
+}
+
+.progress{
+
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#ff4d6d,#ff8fab);
+animation:load 2.5s forwards;
+
+}
+
+@keyframes load{
+
+0%{
+width:0%;
+}
+
+100%{
+width:100%;
+}
+
+}
+
+@keyframes pulse{
+
+50%{
+transform:scale(1.08);
+}
+
+}
+
+/* Hidden */
+
+.hidden{
+display:none !important;
+}
+
+/* Quiz Page */
+
+#quiz,
+#bouquetPage,
+#letter{
+
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+
+}
+
+.glass{
+
+width:100%;
+max-width:400px;
+padding:30px;
+border-radius:20px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(18px);
+
+box-shadow:0 0 25px rgba(255,77,109,.4);
+
+text-align:center;
+
+}
+
+.glass h2{
+
+font-size:28px;
 margin-bottom:20px;
+color:#ff7aa2;
+
 }
 
 .question{
-font-size:20px;
-margin-bottom:25px;
+
+font-size:18px;
+margin-bottom:20px;
+
 }
 
 input{
-width:90%;
-max-width:340px;
+
+width:100%;
 padding:15px;
-margin:10px;
+margin:10px 0;
+
 border:none;
-border-radius:12px;
-font-size:16px;
 outline:none;
+
+border-radius:12px;
+
 background:#ffffff15;
-color:#fff;
-backdrop-filter:blur(10px);
+
+color:white;
+
+font-size:16px;
+
 }
 
 input::placeholder{
+
 color:#ddd;
+
 }
 
 button{
+
+width:100%;
+padding:15px;
+
 margin-top:20px;
-padding:15px 35px;
-font-size:18px;
+
 border:none;
+
 border-radius:40px;
-background:#ff4d6d;
-color:white;
+
+font-size:18px;
+
+font-weight:bold;
+
 cursor:pointer;
+
+background:linear-gradient(45deg,#ff4d6d,#ff8fab);
+
+color:white;
+
 transition:.3s;
+
 }
 
 button:hover{
-transform:scale(1.05);
-background:#ff2f59;
+
+transform:scale(1.03);
+
 }
 
 #result{
-margin-top:15px;
-color:#ffd166;
+
+margin-top:20px;
 font-size:18px;
+
+font-weight:bold;
+
 }
+/* ===========================
+   LOVE ARCADE STYLE - PART 2
+=========================== */
+
+/* Bouquet */
 
 #bouquetPage h2{
-font-size:34px;
-margin-bottom:10px;
+font-size:32px;
 color:#ff6b81;
+margin-bottom:10px;
 }
 
 #bouquetPage p{
-margin-bottom:20px;
-font-size:20px;
+font-size:18px;
+margin-bottom:15px;
 }
 
 #bouquet{
 width:260px;
 max-width:80%;
 cursor:pointer;
-animation:float 2s ease-in-out infinite;
+animation:float 2.5s ease-in-out infinite;
 transition:.3s;
+filter:drop-shadow(0 0 20px rgba(255,105,180,.6));
 }
 
 #bouquet:hover{
 transform:scale(1.08);
 }
 
-.card{
-width:95%;
-max-width:420px;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(15px);
-padding:25px;
-border-radius:20px;
-box-shadow:0 0 25px rgba(255,77,109,.5);
-}
-
-.card h1{
-color:#ff5d8f;
-margin-bottom:20px;
-font-size:32px;
-}
-
-#typing{
-font-size:18px;
-line-height:1.8;
-white-space:pre-line;
-}
-
-#hearts{
-position:fixed;
-width:100%;
-height:100%;
-pointer-events:none;
-overflow:hidden;
-}
-
-.heart{
-position:absolute;
-bottom:-20px;
-font-size:22px;
-animation:rise 8s linear forwards;
-}
-
-@keyframes rise{
-0%{
-transform:translateY(0) scale(.6);
-opacity:0;
-}
-20%{
-opacity:1;
-}
-100%{
-transform:translateY(-110vh) scale(1.4);
-opacity:0;
-}
-}
-
 @keyframes float{
+
 0%,100%{
 transform:translateY(0);
 }
+
 50%{
 transform:translateY(-18px);
 }
+
 }
 
-@keyframes pulse{
-50%{
-transform:scale(1.1);
-}
-}
-
-@media(max-width:480px){
+/* Love Letter */
 
 .card{
-padding:20px;
+
+width:100%;
+max-width:420px;
+
+padding:30px;
+
+border-radius:25px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(20px);
+
+box-shadow:0 0 35px rgba(255,105,180,.5);
+
+text-align:center;
+
+animation:fadeIn .8s;
+
 }
 
 .card h1{
-font-size:26px;
+
+font-size:30px;
+
+color:#ff7aa2;
+
+margin-bottom:20px;
+
 }
 
 #typing{
-font-size:16px;
+
+font-size:17px;
+
+line-height:1.8;
+
+white-space:pre-wrap;
+
+text-align:left;
+
 }
 
-#bouquet{
-width:220px;
+/* Footer */
+
+#footer{
+
+position:fixed;
+
+bottom:15px;
+
+left:0;
+
+width:100%;
+
+text-align:center;
+
+font-size:14px;
+
+color:#ffc0cb;
+
+z-index:10;
+
+}
+
+/* Fade */
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* Confetti */
+
+#confetti{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+pointer-events:none;
+
+overflow:hidden;
+
+z-index:999;
+
+}
+
+.confetti{
+
+position:absolute;
+
+top:-30px;
+
+width:10px;
+
+height:20px;
+
+border-radius:3px;
+
+animation:fall linear forwards;
+
+}
+
+@keyframes fall{
+
+0%{
+
+transform:translateY(-20px) rotate(0deg);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(110vh) rotate(720deg);
+
+opacity:0;
+
+}
+
+}
+
+/* Mobile Responsive */
+
+@media screen and (max-width:480px){
+
+.loader h1{
+
+font-size:34px;
+
+}
+
+.glass{
+
+padding:22px;
+
+}
+
+.glass h2{
+
+font-size:24px;
+
+}
+
+.question{
+
+font-size:17px;
+
+}
+
+input{
+
+font-size:15px;
+
+padding:14px;
+
 }
 
 button{
-width:90%;
+
+font-size:17px;
+
+padding:14px;
+
+}
+
+#bouquet{
+
+width:220px;
+
+}
+
+.card{
+
+padding:22px;
+
+}
+
+.card h1{
+
+font-size:24px;
+
+}
+
+#typing{
+
+font-size:15px;
+
 }
 
 }
+
+/* Background Glow */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+width:300px;
+
+height:300px;
+
+background:#ff4d6d55;
+
+filter:blur(140px);
+
+top:-120px;
+
+left:-120px;
+
+animation:moveGlow 8s infinite alternate;
+
+}
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+width:300px;
+
+height:300px;
+
+background:#8b5cf655;
+
+filter:blur(140px);
+
+bottom:-120px;
+
+right:-120px;
+
+animation:moveGlow2 10s infinite alternate;
+
+}
+
+@keyframes moveGlow{
+
+100%{
+
+transform:translate(120px,120px);
+
+}
+
+}
+
+@keyframes moveGlow2{
+
+100%{
+
+transform:translate(-120px,-120px);
+
+}
+
+  }
