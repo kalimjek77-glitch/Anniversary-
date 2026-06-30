@@ -5,106 +5,98 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy 4th Anniversary ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-background:#0f172a;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-overflow:hidden;
-color:white;
-}
-
-body::before{
-content:"";
-position:absolute;
-width:300%;
-height:300%;
-background:radial-gradient(circle,#ff4d6d22,#0f172a,#000);
-animation:rotate 18s linear infinite;
-}
-
-@keyframes rotate{
-100%{transform:rotate(360deg);}
-}
-
-.card{
-position:relative;
-z-index:1;
-width:90%;
-max-width:700px;
-padding:40px;
-border-radius:20px;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(15px);
-box-shadow:0 0 30px #ff4d6d55;
-text-align:center;
-}
-
-h1{
-color:#ff4d6d;
-margin-bottom:20px;
-font-size:2.3rem;
-}
-
-#typing{
-font-size:18px;
-line-height:1.8;
-min-height:220px;
-}
-
-.heart{
-font-size:60px;
-animation:beat 1s infinite;
-margin-bottom:20px;
-}
-
-@keyframes beat{
-50%{
-transform:scale(1.2);
-}
-}
-
-footer{
-margin-top:25px;
-color:#ff9db5;
-font-size:15px;
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
+<!-- Floating Hearts -->
+<div id="hearts"></div>
+
+<!-- Loading -->
+<div id="loading">
+    <h1>LOVE.exe</h1>
+    <p>Initializing...</p>
+</div>
+
+<!-- Quiz -->
+<section id="quiz" class="hidden">
+
+<h2>🎮 LOVE ARCADE 🎮</h2>
+
+<p class="question">
+Who is the most beautiful girl in the world?
+</p>
+
+<input
+type="text"
+id="fname"
+placeholder="First Name">
+
+<input
+type="text"
+id="mname"
+placeholder="Middle Name">
+
+<input
+type="text"
+id="lname"
+placeholder="Last Name">
+
+<button onclick="checkAnswer()">
+Continue ❤️
+</button>
+
+<p id="result"></p>
+
+</section>
+
+<!-- Bouquet -->
+<section id="bouquetPage" class="hidden">
+
+<h2>Congratulations ❤️</h2>
+
+<p>Click the Bouquet</p>
+
+<img
+src="bouquet.gif"
+id="bouquet"
+onclick="openLetter()">
+
+</section>
+
+<!-- Love Letter -->
+<section id="letter" class="hidden">
+
 <div class="card">
 
-<div class="heart">❤️</div>
-
-<h1>Happy 4th Anniversary, My Love</h1>
+<h1>
+Happy 4th Anniversary
+❤️
+</h1>
 
 <p id="typing"></p>
 
-<footer>
-Forever & Always ❤️<br>
-— Love, Jojo
-</footer>
-
 </div>
 
-<script>
+</section>
 
-const text = `Dear Love,
+<audio
+id="bgmusic"
+loop>
 
-Happy 4th Anniversary! ❤️
+<source
+src="music.mp3"
+type="audio/mpeg">
+
+</audio>
+
+<script src="script.js"></script>
+
+</body>
+</html>Happy 4th Anniversary! ❤️
 
 Four years have passed, yet every day with you still feels special.
 
