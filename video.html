@@ -109,6 +109,38 @@ letter-spacing:2px;
 z-index:2;
 text-shadow:0 0 15px rgba(255,255,255,.5);
 }
+    #ending{
+display:none;
+position:relative;
+z-index:2;
+text-align:center;
+animation:fade .8s;
+}
+
+#ending img{
+width:220px;
+max-width:80%;
+background:transparent;
+}
+
+#ending h2{
+margin-top:20px;
+color:white;
+font-size:28px;
+font-weight:bold;
+text-shadow:0 0 15px rgba(255,255,255,.5);
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:scale(.9);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+    }
 </style>
 </head>
 
@@ -123,9 +155,30 @@ text-shadow:0 0 15px rgba(255,255,255,.5);
 
 <div class="title"> </div>
 
-<video autoplay controls>
+<video id="video" autoplay controls>
     <source src="video.mp4" type="video/mp4">
 </video>
 
+<div id="ending">
+    <img src="love.gif" alt="Love GIF">
+    <h2>I love you so much.<br>Hope you like it. ❤️</h2>
+</div>
 </body>
+    <script>
+const video=document.getElementById("video");
+const ending=document.getElementById("ending");
+
+video.addEventListener("ended",()=>{
+
+video.style.display="none";
+
+ending.style.display="block";
+
+setTimeout(()=>{
+window.location.href="index.html";
+},5000);
+
+});
+    </script>
+    
 </html>
