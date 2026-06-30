@@ -15,14 +15,21 @@
 <!-- Floating Hearts -->
 <div id="hearts"></div>
 
-<!-- Loading -->
+<!-- Loading Screen -->
 <div id="loading">
-    <h1>LOVE.exe</h1>
-    <p>Initializing...</p>
+    <div class="loader">
+        <h1>LOVE.exe ❤️</h1>
+        <p>Initializing Love System...</p>
+        <div class="loading-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
 </div>
 
-<!-- Quiz -->
+<!-- Arcade Quiz -->
 <section id="quiz" class="hidden">
+
+<div class="glass">
 
 <h2>🎮 LOVE ARCADE 🎮</h2>
 
@@ -51,19 +58,30 @@ Continue ❤️
 
 <p id="result"></p>
 
+</div>
+
 </section>
 
-<!-- Bouquet -->
+<!-- Bouquet Page -->
 <section id="bouquetPage" class="hidden">
 
-<h2>Congratulations ❤️</h2>
+<div class="glass">
 
-<p>Click the Bouquet</p>
+<h2>Congratulations! ❤️</h2>
+
+<p>
+You unlocked the secret message.
+</p>
+
+<h3>💐 Tap the Bouquet 💐</h3>
 
 <img
 src="giphy.gif"
 id="bouquet"
+alt="Bouquet"
 onclick="openLetter()">
+
+</div>
 
 </section>
 
@@ -72,57 +90,29 @@ onclick="openLetter()">
 
 <div class="card">
 
-<h1>
-Happy 4th Anniversary
-❤️
-</h1>
+<h1>Happy 4th Anniversary ❤️</h1>
 
 <p id="typing"></p>
 
 </div>
 
 </section>
+<!-- Confetti -->
+<div id="confetti"></div>
 
-<audio
-id="bgmusic"
-loop>
-
-<source
-src="music.mp3"
-type="audio/mpeg">
-
+<!-- Background Music -->
+<audio id="bgmusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
 </audio>
 
+<!-- Footer -->
+<footer id="footer" class="hidden">
+    <p>Made with ❤️ by Jojo</p>
+</footer>
+
+<!-- JavaScript -->
 <script src="script.js"></script>
-
-</body>
-</html>Happy 4th Anniversary! ❤️
-
-Four years have passed, yet every day with you still feels special.
-
-Thank you for staying beside me through every challenge, every success, and every dream.
-
-You are my greatest blessing, my best friend, and the love of my life.
-
-No matter what happens, I will always choose you.
-
-I love you more than words, more than time, and more than anything in this world.
-
-Here's to forever with you. ❤️`;
-
-let i = 0;
-
-function typeWriter(){
-if(i < text.length){
-document.getElementById("typing").innerHTML += text.charAt(i);
-i++;
-setTimeout(typeWriter,35);
-}
-}
-
-typeWriter();
-
-</script>
 
 </body>
 </html>
