@@ -59,42 +59,46 @@ animation:move2 8s infinite alternate;
 100%{ transform:translate(-120px,-120px); }  
 }  
 
-/* ONLY IMAGE BACKGROUND - NO BOX, NO SHADOW */
+/* LONG NOTE IMAGE - NO BOX, NO SHADOW */
 .card{  
 position:relative;  
 z-index:5;  
 width:100%;  
 max-width:360px;  
-height:600px;  
+height:780px;  
 
 background:url("note.png") center center/cover no-repeat;  
 
-padding:60px 40px;  
+padding:70px 40px;  
 text-align:center;  
 
 display:flex;  
 flex-direction:column;  
 justify-content:flex-start;  
+overflow:hidden;  
 }  
 
 h1{  
 font-size:24px;  
-color:#fff;  
+color:black;  
 margin-bottom:15px;  
-text-shadow:0 2px 6px rgba(0,0,0,.5);  
+text-shadow:none;  
 }  
 
 #typing{  
 font-size:15px;  
 line-height:1.6;  
-color:#fff;  
+color:black;  
 text-align:left;  
 white-space:pre-wrap;  
-text-shadow:0 2px 6px rgba(0,0,0,.5);  
+text-shadow:none;  
+overflow-y:auto;  
+max-height:650px;  
+padding-right:5px;  
 }  
 
 @media(max-width:480px){  
-.card{ max-width:330px; height:560px; padding:50px 30px; }  
+.card{ max-width:330px; height:700px; padding:60px 30px; }  
 h1{ font-size:20px; }  
 #typing{ font-size:14px; }  
 }  
