@@ -59,6 +59,7 @@ animation:move2 8s infinite alternate;
 100%{ transform:translate(-120px,-120px); }  
 }  
 
+/* NOTE CONTAINER */  
 .card{  
 position:relative;  
 z-index:5;  
@@ -70,7 +71,7 @@ padding:70px 40px;
 display:flex;  
 flex-direction:column;  
 justify-content:flex-start;  
-overflow:hidden;  
+overflow-y:auto;  
 }  
 
 h1{  
@@ -85,13 +86,13 @@ line-height:1.6;
 color:black;  
 text-align:left;  
 white-space:pre-wrap;  
-overflow-y:auto;  
-max-height:520px;  
+max-height:none;  
 }  
 
+/* FINGERPRINT SECTION */  
 #fingerWrap{  
 margin-top:20px;  
-display:flex;  
+display:none;  
 flex-direction:column;  
 align-items:center;  
 gap:8px;  
@@ -164,6 +165,7 @@ transition:width 5s linear;
 
 <p id="typing"></p>  
 
+<!-- fingerprint appears AFTER message -->
 <div id="fingerWrap">  
   <div class="fingerprint" id="finger">🫆</div>  
   <div class="fp-text">Your Finger Print</div>  
@@ -211,9 +213,9 @@ if(i<message.length){
 document.getElementById("typing").innerHTML += message.charAt(i);  
 i++;  
 setTimeout(typeWriter,35);  
-} else {
-document.getElementById("fingerWrap").style.display="flex";
-}
+} else {  
+document.getElementById("fingerWrap").style.display="flex";  
+}  
 }  
 
 window.onload=function(){  
@@ -227,6 +229,7 @@ music.play();
 });  
 };  
 
+/* LONG PRESS LOGIC */  
 const finger=document.getElementById("finger");
 const bar=document.getElementById("bar");
 const progress=document.getElementById("progress");
