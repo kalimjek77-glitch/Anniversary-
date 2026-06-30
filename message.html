@@ -27,82 +27,57 @@ padding:20px;
 position:relative;  
 }  
 
-body::before{  
-content:"";  
-position:absolute;  
-width:320px;  
-height:320px;  
-background:#ffffff55;  
-filter:blur(140px);  
-top:-120px;  
-left:-120px;  
-animation:move1 8s infinite alternate;  
-}  
-
-body::after{  
-content:"";  
-position:absolute;  
-width:320px;  
-height:320px;  
-background:#ff5d8f;  
-filter:blur(140px);  
-bottom:-120px;  
-right:-120px;  
-animation:move2 8s infinite alternate;  
-}  
-
-@keyframes move1{  
-100%{ transform:translate(120px,120px); }  
-}  
-
-@keyframes move2{  
-100%{ transform:translate(-120px,-120px); }  
-}  
-
-/* NOTE CONTAINER */  
+/* NOTE IMAGE FIXED CONTAINER */  
 .card{  
 position:relative;  
 z-index:5;  
 width:100%;  
 max-width:360px;  
 height:780px;  
-background:url("note.png") center center/cover no-repeat;  
-padding:70px 40px;  
+background:url("note.png") center center/100% 100% no-repeat;  
+padding:60px 35px;  
 display:flex;  
 flex-direction:column;  
-justify-content:flex-start;  
+overflow:hidden;  
+}  
+
+/* CONTENT AREA INSIDE NOTE */  
+.content{  
+flex:1;  
 overflow-y:auto;  
+padding-right:5px;  
 }  
 
 h1{  
-font-size:24px;  
+font-size:22px;  
 color:black;  
-margin-bottom:15px;  
+margin-bottom:10px;  
+text-align:center;  
 }  
 
 #typing{  
-font-size:15px;  
+font-size:14px;  
 line-height:1.6;  
 color:black;  
 text-align:left;  
 white-space:pre-wrap;  
-max-height:none;  
 }  
 
-/* FINGERPRINT SECTION */  
+/* FINGERPRINT AREA */  
 #fingerWrap{  
 margin-top:20px;  
 display:none;  
 flex-direction:column;  
 align-items:center;  
 gap:8px;  
+padding-bottom:20px;  
 }  
 
 .fingerprint{  
 width:70px;  
 height:70px;  
 border-radius:50%;  
-border:2px solid rgba(0,0,0,0.5);  
+border:2px solid rgba(0,0,0,0.6);  
 display:flex;  
 align-items:center;  
 justify-content:center;  
@@ -163,15 +138,18 @@ transition:width 5s linear;
 
 <h1>❤️ Happy 4th Anniversary ❤️</h1>  
 
+<div class="content">  
 <p id="typing"></p>  
 
-<!-- fingerprint appears AFTER message -->
+<!-- fingerprint appears after message -->  
 <div id="fingerWrap">  
   <div class="fingerprint" id="finger">🫆</div>  
   <div class="fp-text">Your Finger Print</div>  
   <div class="progress" id="progress">  
     <div class="progress-bar" id="bar"></div>  
   </div>  
+</div>  
+
 </div>  
 
 </div>  
@@ -229,38 +207,38 @@ music.play();
 });  
 };  
 
-/* LONG PRESS LOGIC */  
-const finger=document.getElementById("finger");
-const bar=document.getElementById("bar");
-const progress=document.getElementById("progress");
+/* LONG PRESS */  
+const finger=document.getElementById("finger");  
+const bar=document.getElementById("bar");  
+const progress=document.getElementById("progress");  
 
-let timer;
-let holding=false;
+let timer;  
+let holding=false;  
 
-function startHold(){
-holding=true;
-progress.style.display="block";
-setTimeout(()=>bar.style.width="100%",50);
+function startHold(){  
+holding=true;  
+progress.style.display="block";  
+setTimeout(()=>bar.style.width="100%",50);  
 
-timer=setTimeout(()=>{
-window.location.href="video.html";
-},5000);
-}
+timer=setTimeout(()=>{  
+window.location.href="video.html";  
+},5000);  
+}  
 
-function cancelHold(){
-if(!holding) return;
-holding=false;
+function cancelHold(){  
+if(!holding) return;  
+holding=false;  
 
-clearTimeout(timer);
-bar.style.width="0%";
-progress.style.display="none";
-}
+clearTimeout(timer);  
+bar.style.width="0%";  
+progress.style.display="none";  
+}  
 
-finger.addEventListener("touchstart",startHold);
-finger.addEventListener("mousedown",startHold);
-finger.addEventListener("touchend",cancelHold);
-finger.addEventListener("mouseup",cancelHold);
-finger.addEventListener("mouseleave",cancelHold);
+finger.addEventListener("touchstart",startHold);  
+finger.addEventListener("mousedown",startHold);  
+finger.addEventListener("touchend",cancelHold);  
+finger.addEventListener("mouseup",cancelHold);  
+finger.addEventListener("mouseleave",cancelHold);  
 
 </script>  
 
