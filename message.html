@@ -59,7 +59,7 @@ animation:move2 8s infinite alternate;
 100%{ transform:translate(-120px,-120px); }  
 }  
 
-/* NOTE IMAGE BACKGROUND ONLY */  
+/* NOTE BACKGROUND ONLY */  
 .card{  
 position:relative;  
 z-index:5;  
@@ -90,10 +90,10 @@ overflow-y:auto;
 max-height:520px;  
 }  
 
-/* FINGERPRINT SECTION (ADDED AT END ONLY) */  
-.fingerprint-container{  
+/* FINGERPRINT (hidden until message finishes) */  
+#fingerWrap{  
 margin-top:20px;  
-display:flex;  
+display:none;  
 flex-direction:column;  
 align-items:center;  
 gap:8px;  
@@ -166,6 +166,15 @@ transition:width 5s linear;
 
 <p id="typing"></p>  
 
+<!-- fingerprint appears ONLY after message ends -->  
+<div id="fingerWrap">  
+  <div class="fingerprint" id="finger">👆</div>  
+  <div class="fp-text">Your Finger Print</div>  
+  <div class="progress" id="progress">  
+    <div class="progress-bar" id="bar"></div>  
+  </div>  
+</div>  
+
 </div>  
 
 <audio id="music" loop>  
@@ -205,7 +214,9 @@ if(i<message.length){
 document.getElementById("typing").innerHTML += message.charAt(i);  
 i++;  
 setTimeout(typeWriter,35);  
-}  
+} else {
+document.getElementById("fingerWrap").style.display="flex";
+}
 }  
 
 window.onload=function(){  
@@ -220,20 +231,6 @@ music.play();
 };  
 
 /* FINGERPRINT LOGIC */  
-setTimeout(()=>{
-
-const container=document.createElement("div");
-container.className="fingerprint-container";
-container.innerHTML=`
-<div class="fingerprint" id="finger">👆</div>
-<div class="fp-text">Your Finger Print</div>
-<div class="progress" id="progress">
-<div class="progress-bar" id="bar"></div>
-</div>
-`;
-
-document.querySelector(".card").appendChild(container);
-
 const finger=document.getElementById("finger");
 const bar=document.getElementById("bar");
 const progress=document.getElementById("progress");
@@ -265,8 +262,6 @@ finger.addEventListener("mousedown",startHold);
 finger.addEventListener("touchend",cancelHold);
 finger.addEventListener("mouseup",cancelHold);
 finger.addEventListener("mouseleave",cancelHold);
-
-},3000);
 
 </script>  
 
