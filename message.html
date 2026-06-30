@@ -59,7 +59,7 @@ animation:move2 8s infinite alternate;
 100%{ transform:translate(-120px,-120px); }  
 }  
 
-/* NOTE BACKGROUND */
+/* NOTE IMAGE BACKGROUND ONLY */  
 .card{  
 position:relative;  
 z-index:5;  
@@ -90,72 +90,70 @@ overflow-y:auto;
 max-height:520px;  
 }  
 
-/* 🔐 FINGERPRINT BUTTON */
-.fingerprint-container{
-margin-top:15px;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:8px;
-}
+/* FINGERPRINT SECTION (ADDED AT END ONLY) */  
+.fingerprint-container{  
+margin-top:20px;  
+display:flex;  
+flex-direction:column;  
+align-items:center;  
+gap:8px;  
+}  
 
-.fingerprint{
-width:70px;
-height:70px;
-border-radius:50%;
-border:2px solid rgba(0,0,0,0.4);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:28px;
-color:black;
-cursor:pointer;
-position:relative;
-animation:pulse 1.5s infinite;
-user-select:none;
-}
+.fingerprint{  
+width:70px;  
+height:70px;  
+border-radius:50%;  
+border:2px solid rgba(0,0,0,0.5);  
+display:flex;  
+align-items:center;  
+justify-content:center;  
+font-size:28px;  
+cursor:pointer;  
+animation:pulse 1.5s infinite;  
+position:relative;  
+}  
 
-.fingerprint::before{
-content:"";
-position:absolute;
-width:100%;
-height:100%;
-border-radius:50%;
-border:2px solid rgba(0,0,0,0.2);
-animation:ring 2s infinite;
-}
+.fingerprint::before{  
+content:"";  
+position:absolute;  
+width:100%;  
+height:100%;  
+border-radius:50%;  
+border:2px solid rgba(0,0,0,0.2);  
+animation:ring 2s infinite;  
+}  
 
-@keyframes pulse{
-0%{ transform:scale(1); }
-50%{ transform:scale(1.05); }
-100%{ transform:scale(1); }
-}
+@keyframes pulse{  
+0%{transform:scale(1);}  
+50%{transform:scale(1.05);}  
+100%{transform:scale(1);}  
+}  
 
-@keyframes ring{
-0%{ transform:scale(1); opacity:1; }
-100%{ transform:scale(1.8); opacity:0; }
-}
+@keyframes ring{  
+0%{transform:scale(1);opacity:1;}  
+100%{transform:scale(1.8);opacity:0;}  
+}  
 
-.fp-text{
-font-size:12px;
-color:black;
-}
+.fp-text{  
+font-size:12px;  
+color:black;  
+}  
 
-.progress{
-width:120px;
-height:6px;
-background:rgba(0,0,0,0.2);
-border-radius:10px;
-overflow:hidden;
-display:none;
-}
+.progress{  
+width:120px;  
+height:6px;  
+background:rgba(0,0,0,0.2);  
+border-radius:10px;  
+overflow:hidden;  
+display:none;  
+}  
 
-.progress-bar{
-height:100%;
-width:0%;
-background:black;
-transition:width 5s linear;
-}
+.progress-bar{  
+width:0%;  
+height:100%;  
+background:black;  
+transition:width 5s linear;  
+}  
 
 </style>  
 </head>  
@@ -163,17 +161,10 @@ transition:width 5s linear;
 <body>  
 
 <div class="card">  
-<h1>❤️ Happy 4th Anniversary ❤️</h1>  
-<p id="typing"></p>  
 
-<!-- FINGERPRINT SECTION -->
-<div class="fingerprint-container">
-<div class="fingerprint" id="finger">👆</div>
-<div class="fp-text">Your Finger Print</div>
-<div class="progress" id="progress">
-<div class="progress-bar" id="bar"></div>
-</div>
-</div>
+<h1>❤️ Happy 4th Anniversary ❤️</h1>  
+
+<p id="typing"></p>  
 
 </div>  
 
@@ -228,7 +219,21 @@ music.play();
 });  
 };  
 
-/* 🔐 LONG PRESS LOGIC */
+/* FINGERPRINT LOGIC */  
+setTimeout(()=>{
+
+const container=document.createElement("div");
+container.className="fingerprint-container";
+container.innerHTML=`
+<div class="fingerprint" id="finger">👆</div>
+<div class="fp-text">Your Finger Print</div>
+<div class="progress" id="progress">
+<div class="progress-bar" id="bar"></div>
+</div>
+`;
+
+document.querySelector(".card").appendChild(container);
+
 const finger=document.getElementById("finger");
 const bar=document.getElementById("bar");
 const progress=document.getElementById("progress");
@@ -236,21 +241,10 @@ const progress=document.getElementById("progress");
 let timer;
 let holding=false;
 
-finger.addEventListener("touchstart",startHold);
-finger.addEventListener("mousedown",startHold);
-
-finger.addEventListener("touchend",cancelHold);
-finger.addEventListener("mouseup",cancelHold);
-finger.addEventListener("mouseleave",cancelHold);
-
 function startHold(){
 holding=true;
 progress.style.display="block";
-bar.style.width="0%";
-
-setTimeout(()=>{
-bar.style.width="100%";
-},50);
+setTimeout(()=>bar.style.width="100%",50);
 
 timer=setTimeout(()=>{
 window.location.href="video.html";
@@ -266,16 +260,13 @@ bar.style.width="0%";
 progress.style.display="none";
 }
 
-setInterval(()=>{  
-const heart=document.createElement("div");  
-heart.className="heart";  
-const hearts=["❤️","💖","💕","💗","💘"];  
-heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];  
-heart.style.left=Math.random()*100+"vw";  
-heart.style.animationDuration=(4+Math.random()*4)+"s";  
-document.body.appendChild(heart);  
-setTimeout(()=>{ heart.remove(); },8000);  
-},450);  
+finger.addEventListener("touchstart",startHold);
+finger.addEventListener("mousedown",startHold);
+finger.addEventListener("touchend",cancelHold);
+finger.addEventListener("mouseup",cancelHold);
+finger.addEventListener("mouseleave",cancelHold);
+
+},3000);
 
 </script>  
 
