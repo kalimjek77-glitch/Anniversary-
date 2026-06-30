@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 4th Anniversary ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0f172a;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+color:white;
+}
+
+body::before{
+content:"";
+position:absolute;
+width:300%;
+height:300%;
+background:radial-gradient(circle,#ff4d6d22,#0f172a,#000);
+animation:rotate 18s linear infinite;
+}
+
+@keyframes rotate{
+100%{transform:rotate(360deg);}
+}
+
+.card{
+position:relative;
+z-index:1;
+width:90%;
+max-width:700px;
+padding:40px;
+border-radius:20px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+box-shadow:0 0 30px #ff4d6d55;
+text-align:center;
+}
+
+h1{
+color:#ff4d6d;
+margin-bottom:20px;
+font-size:2.3rem;
+}
+
+#typing{
+font-size:18px;
+line-height:1.8;
+min-height:220px;
+}
+
+.heart{
+font-size:60px;
+animation:beat 1s infinite;
+margin-bottom:20px;
+}
+
+@keyframes beat{
+50%{
+transform:scale(1.2);
+}
+}
+
+footer{
+margin-top:25px;
+color:#ff9db5;
+font-size:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="heart">❤️</div>
+
+<h1>Happy 4th Anniversary, My Love</h1>
+
+<p id="typing"></p>
+
+<footer>
+Forever & Always ❤️<br>
+— Love, Jojo
+</footer>
+
+</div>
+
+<script>
+
+const text = `Dear Love,
+
+Happy 4th Anniversary! ❤️
+
+Four years have passed, yet every day with you still feels special.
+
+Thank you for staying beside me through every challenge, every success, and every dream.
+
+You are my greatest blessing, my best friend, and the love of my life.
+
+No matter what happens, I will always choose you.
+
+I love you more than words, more than time, and more than anything in this world.
+
+Here's to forever with you. ❤️`;
+
+let i = 0;
+
+function typeWriter(){
+if(i < text.length){
+document.getElementById("typing").innerHTML += text.charAt(i);
+i++;
+setTimeout(typeWriter,35);
+}
+}
+
+typeWriter();
+
+</script>
+
+</body>
+</html>
