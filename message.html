@@ -1,246 +1,390 @@
 <!DOCTYPE html>
-<html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
-<title>Happy 4th Anniversary ❤️</title>  
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy 4th Anniversary ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">  
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-<style>  
+<style>
 
-*{  
-margin:0;  
-padding:0;  
-box-sizing:border-box;  
-font-family:'Poppins',sans-serif;  
-}  
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
-body{  
-display:flex;  
-justify-content:center;  
-align-items:center;  
-min-height:100vh;  
-background:linear-gradient(135deg,#ff4d6d,#ff8fab,#ffd6e0);  
-overflow:hidden;  
-padding:20px;  
-position:relative;  
-}  
+body{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+background:linear-gradient(135deg,#ff4d6d,#ff8fab,#ffd6e0);
+overflow:hidden;
+padding:20px;
+position:relative;
+}
 
-/* NOTE IMAGE FIXED CONTAINER */  
-.card{  
-position:relative;  
-z-index:5;  
-width:100%;  
-max-width:360px;  
-height:780px;  
-background:url("note.png") center center/100% 100% no-repeat;  
-padding:60px 35px;  
-display:flex;  
-flex-direction:column;  
-overflow:hidden;  
-}  
+body::before{
+content:"";
+position:absolute;
+width:320px;
+height:320px;
+background:#ffffff55;
+filter:blur(140px);
+top:-120px;
+left:-120px;
+animation:move1 8s infinite alternate;
+}
 
-/* CONTENT AREA INSIDE NOTE */  
-.content{  
-flex:1;  
-overflow-y:auto;  
-padding-right:5px;  
-}  
+body::after{
+content:"";
+position:absolute;
+width:320px;
+height:320px;
+background:#ff5d8f;
+filter:blur(140px);
+bottom:-120px;
+right:-120px;
+animation:move2 8s infinite alternate;
+}
 
-h1{  
-font-size:22px;  
-color:black;  
-margin-bottom:10px;  
-text-align:center;  
-}  
+@keyframes move1{
+100%{
+transform:translate(120px,120px);
+}
+}
 
-#typing{  
-font-size:14px;  
-line-height:1.6;  
-color:black;  
-text-align:left;  
-white-space:pre-wrap;  
-}  
+@keyframes move2{
+100%{
+transform:translate(-120px,-120px);
+}
+}
 
-/* FINGERPRINT AREA */  
-#fingerWrap{  
-margin-top:20px;  
-display:none;  
-flex-direction:column;  
-align-items:center;  
-gap:8px;  
-padding-bottom:20px;  
-}  
+/* LONG NOTE */
+.card{
+position:relative;
+z-index:5;
+width:100%;
+max-width:320px;
+height:900px;
+background:url("note.png") center top/contain no-repeat;
+padding:70px 28px;
+display:flex;
+flex-direction:column;
+overflow:hidden;
+}
 
-.fingerprint{  
-width:70px;  
-height:70px;  
-border-radius:50%;  
-border:2px solid rgba(0,0,0,0.6);  
-display:flex;  
-align-items:center;  
-justify-content:center;  
-font-size:28px;  
-cursor:pointer;  
-animation:pulse 1.5s infinite;  
-position:relative;  
-}  
+/* CONTENT AREA */
+.content{
+flex:1;
+overflow-y:auto;
+overflow-x:hidden;
+padding-right:5px;
+}
 
-.fingerprint::before{  
-content:"";  
-position:absolute;  
-width:100%;  
-height:100%;  
-border-radius:50%;  
-border:2px solid rgba(0,0,0,0.2);  
-animation:ring 2s infinite;  
-}  
+.content::-webkit-scrollbar{
+width:4px;
+}
 
-@keyframes pulse{  
-0%{transform:scale(1);}  
-50%{transform:scale(1.05);}  
-100%{transform:scale(1);}  
-}  
+.content::-webkit-scrollbar-thumb{
+background:#999;
+border-radius:20px;
+}
 
-@keyframes ring{  
-0%{transform:scale(1);opacity:1;}  
-100%{transform:scale(1.8);opacity:0;}  
-}  
+h1{
+font-size:23px;
+text-align:center;
+color:#000;
+margin-bottom:15px;
+}
 
-.fp-text{  
-font-size:12px;  
-color:black;  
-}  
+#typing{
+font-size:14px;
+line-height:1.65;
+color:#000;
+white-space:pre-wrap;
+text-align:left;
+}
 
-.progress{  
-width:120px;  
-height:6px;  
-background:rgba(0,0,0,0.2);  
-border-radius:10px;  
-overflow:hidden;  
-display:none;  
-}  
+/* Fingerprint */
+#fingerWrap{
+display:none;
+flex-direction:column;
+align-items:center;
+margin-top:25px;
+margin-bottom:40px;
+}
 
-.progress-bar{  
-width:0%;  
-height:100%;  
-background:black;  
-transition:width 5s linear;  
-}  
+.fingerprint{
+width:75px;
+height:75px;
+border-radius:50%;
+border:2px solid rgba(0,0,0,.45);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:40px;
+cursor:pointer;
+position:relative;
+animation:pulse 1.5s infinite;
+}
 
-</style>  
-</head>  
+.fingerprint::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+border-radius:50%;
+border:2px solid rgba(0,0,0,.2);
+animation:ring 2s infinite;
+}
 
-<body>  
+.fp-text{
+margin-top:8px;
+font-size:13px;
+color:#000;
+}
 
-<div class="card">  
+.progress{
+width:120px;
+height:6px;
+background:#ddd;
+border-radius:20px;
+overflow:hidden;
+display:none;
+margin-top:10px;
+}
 
-<h1>❤️ Happy 4th Anniversary ❤️</h1>  
+.progress-bar{
+width:0%;
+height:100%;
+background:#000;
+transition:width 5s linear;
+}
 
-<div class="content">  
-<p id="typing"></p>  
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.05);}
+100%{transform:scale(1);}
+}
 
-<!-- fingerprint appears after message -->  
-<div id="fingerWrap">  
-  <div class="fingerprint" id="finger">🫆</div>  
-  <div class="fp-text">Your Finger Print</div>  
-  <div class="progress" id="progress">  
-    <div class="progress-bar" id="bar"></div>  
-  </div>  
-</div>  
+@keyframes ring{
+0%{
+transform:scale(1);
+opacity:1;
+}
+100%{
+transform:scale(1.8);
+opacity:0;
+}
+}
 
-</div>  
+.heart{
+position:absolute;
+bottom:-30px;
+font-size:24px;
+animation:floatUp linear forwards;
+}
 
-</div>  
+@keyframes floatUp{
+0%{
+transform:translateY(0) scale(.5);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) scale(1.4);
+opacity:0;
+}
+}
 
-<audio id="music" loop>  
-<source src="My Forever Starts.mp3" type="audio/mpeg">  
-</audio>  
+</style>
+</head>
 
-<script>  
+  <body>
 
-const message=`Dear April Joy Esperila Contiga,  
+<div class="card">
 
-Happy 4th Anniversary, My Love! ❤️  
+    <h1>❤️ Happy 4th Anniversary ❤️</h1>
 
-Four wonderful years have passed, and every moment with you has been the happiest chapter of my life.  
+    <div class="content">
 
-Thank you for staying beside me through every challenge, every success, every smile, and every tear.  
+        <p id="typing"></p>
 
-You are my greatest blessing, my best friend, my safe place, and the love of my life.  
+        <!-- Hidden fingerprint (will appear after message finishes) -->
+        <div id="fingerWrap">
 
-No matter where life takes us, I promise to always choose you, respect you, support you, and love you with all my heart.  
+            <div class="fingerprint" id="finger">🫆</div>
 
-Thank you for making my world brighter just by being in it.  
+            <div class="fp-text">
+                Your Finger Print
+            </div>
 
-May God continue to bless our relationship and guide us as we chase our dreams together.  
+            <div class="progress" id="progress">
+                <div class="progress-bar" id="bar"></div>
+            </div>
 
-Happy 4th Anniversary, Mahal.  
+        </div>
 
-I love you more than words can ever express.  
+    </div>
 
-Forever and Always,  
+</div>
 
-❤️ Jojo ❤️`;  
+<audio id="music" autoplay loop>
+    <source src="My Forever Starts.mp3" type="audio/mpeg">
+</audio>
 
-let i=0;  
+<script>
 
-function typeWriter(){  
-if(i<message.length){  
-document.getElementById("typing").innerHTML += message.charAt(i);  
-i++;  
-setTimeout(typeWriter,35);  
-} else {  
-document.getElementById("fingerWrap").style.display="flex";  
-}  
-}  
+const message=`Dear April Joy Esperila Contiga,
 
-window.onload=function(){  
-typeWriter();  
+Happy 4th Anniversary, My Love! ❤️
 
-const music=document.getElementById("music");  
-music.play().catch(()=>{  
-document.body.addEventListener("click",()=>{  
-music.play();  
-},{once:true});  
-});  
-};  
+Four wonderful years have passed, and every moment with you has been the happiest chapter of my life.
 
-/* LONG PRESS */  
-const finger=document.getElementById("finger");  
-const bar=document.getElementById("bar");  
-const progress=document.getElementById("progress");  
+Thank you for staying beside me through every challenge, every success, every smile, and every tear.
 
-let timer;  
-let holding=false;  
+You are my greatest blessing, my best friend, my safe place, and the love of my life.
 
-function startHold(){  
-holding=true;  
-progress.style.display="block";  
-setTimeout(()=>bar.style.width="100%",50);  
+No matter where life takes us, I promise to always choose you, respect you, support you, and love you with all my heart.
 
-timer=setTimeout(()=>{  
-window.location.href="video.html";  
-},5000);  
-}  
+Thank you for making my world brighter just by being in it.
 
-function cancelHold(){  
-if(!holding) return;  
-holding=false;  
+May God continue to bless our relationship and guide us as we chase our dreams together.
 
-clearTimeout(timer);  
-bar.style.width="0%";  
-progress.style.display="none";  
-}  
+Happy 4th Anniversary, Mahal.
 
-finger.addEventListener("touchstart",startHold);  
-finger.addEventListener("mousedown",startHold);  
-finger.addEventListener("touchend",cancelHold);  
-finger.addEventListener("mouseup",cancelHold);  
-finger.addEventListener("mouseleave",cancelHold);  
+I love you more than words can ever express.
 
-</script>  
+Forever and Always,
 
-</body>  
+❤️ Jojo ❤️`;
+
+let i = 0;
+
+  function typeWriter(){
+
+    if(i < message.length){
+
+        document.getElementById("typing").innerHTML += message.charAt(i);
+
+        i++;
+
+        setTimeout(typeWriter,35);
+
+    }else{
+
+        // Show fingerprint after the message is completely typed
+        document.getElementById("fingerWrap").style.display="flex";
+
+    }
+
+}
+
+window.onload=function(){
+
+    typeWriter();
+
+    const music=document.getElementById("music");
+
+    music.play().catch(()=>{
+
+        document.body.addEventListener("click",()=>{
+
+            music.play();
+
+        },{once:true});
+
+    });
+
+};
+
+
+/* ---------- Fingerprint ---------- */
+
+const finger=document.getElementById("finger");
+const progress=document.getElementById("progress");
+const bar=document.getElementById("bar");
+
+let timer=null;
+let holding=false;
+
+function startHold(){
+
+    holding=true;
+
+    progress.style.display="block";
+
+    bar.style.width="0%";
+
+    setTimeout(()=>{
+        bar.style.width="100%";
+    },50);
+
+    timer=setTimeout(()=>{
+        window.location.href="video.html";
+    },5000);
+
+}
+
+function cancelHold(){
+
+    if(!holding) return;
+
+    holding=false;
+
+    clearTimeout(timer);
+
+    bar.style.width="0%";
+
+    progress.style.display="none";
+
+}
+
+finger.addEventListener("touchstart",startHold);
+finger.addEventListener("mousedown",startHold);
+
+finger.addEventListener("touchend",cancelHold);
+finger.addEventListener("mouseup",cancelHold);
+finger.addEventListener("mouseleave",cancelHold);
+
+
+/* ---------- Floating Hearts ---------- */
+
+setInterval(()=>{
+
+    const heart=document.createElement("div");
+
+    heart.className="heart";
+
+    const hearts=["❤️","💖","💕","💗","💘"];
+
+    heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];
+
+    heart.style.left=Math.random()*100+"vw";
+
+    heart.style.animationDuration=(4+Math.random()*4)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },8000);
+
+},450);
+
+</script>
+
+</body>
+</html>
+</script>
+
+</body>
 </html>
