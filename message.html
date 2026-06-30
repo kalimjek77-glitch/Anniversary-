@@ -1,287 +1,208 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Happy 4th Anniversary ❤️</title>
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">  
+<title>Happy 4th Anniversary ❤️</title>  
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">  
 
-<style>
+<style>  
+  
+*{  
+margin:0;  
+padding:0;  
+box-sizing:border-box;  
+font-family:'Poppins',sans-serif;  
+}  
+  
+body{  
+display:flex;  
+justify-content:center;  
+align-items:center;  
+min-height:100vh;  
+background:linear-gradient(135deg,#ff4d6d,#ff8fab,#ffd6e0);  
+overflow:hidden;  
+padding:20px;  
+position:relative;  
+}  
+  
+body::before{  
+content:"";  
+position:absolute;  
+width:320px;  
+height:320px;  
+background:#ffffff55;  
+filter:blur(140px);  
+top:-120px;  
+left:-120px;  
+animation:move1 8s infinite alternate;  
+}  
+  
+body::after{  
+content:"";  
+position:absolute;  
+width:320px;  
+height:320px;  
+background:#ff5d8f;  
+filter:blur(140px);  
+bottom:-120px;  
+right:-120px;  
+animation:move2 8s infinite alternate;  
+}  
+  
+@keyframes move1{  
+100%{ transform:translate(120px,120px); }  
+}  
+  
+@keyframes move2{  
+100%{ transform:translate(-120px,-120px); }  
+}  
+  
+.card{  
+position:relative;  
+z-index:5;  
+width:100%;  
+max-width:360px;  
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+/* NOTE IMAGE BACKGROUND */
+background: url("note.png") center center/cover no-repeat;
 
-body{
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
-background:linear-gradient(135deg,#ff4d6d,#ff8fab,#ffd6e0);
-overflow:hidden;
-padding:20px;
-position:relative;
-}
+border-radius:25px;  
+padding:25px;  
+text-align:center;  
+box-shadow:0 15px 35px rgba(0,0,0,.2);  
+animation:fade .8s;  
+}  
 
-body::before{
+/* dark overlay for readability */
+.card::before{
 content:"";
 position:absolute;
-width:320px;
-height:320px;
-background:#ffffff55;
-filter:blur(140px);
-top:-120px;
-left:-120px;
-animation:move1 8s infinite alternate;
-}
-
-body::after{
-content:"";
-position:absolute;
-width:320px;
-height:320px;
-background:#ff5d8f;
-filter:blur(140px);
-bottom:-120px;
-right:-120px;
-animation:move2 8s infinite alternate;
-}
-
-@keyframes move1{
-100%{
-transform:translate(120px,120px);
-}
-}
-
-@keyframes move2{
-100%{
-transform:translate(-120px,-120px);
-}
-}
-
-.card{
-
-position:relative;
-z-index:5;
-
-width:100%;
-max-width:360px;
-
-background:rgba(255,255,255,.2);
-
-backdrop-filter:blur(18px);
-
+inset:0;
+background:rgba(0,0,0,0.35);
 border-radius:25px;
-
-padding:25px;
-
-text-align:center;
-
-box-shadow:0 15px 35px rgba(0,0,0,.2);
-
-animation:fade .8s;
-
+z-index:0;
 }
 
-@keyframes fade{
-
-from{
-opacity:0;
-transform:translateY(30px);
+.card > *{
+position:relative;
+z-index:1;
 }
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-h1{
-
-font-size:28px;
-
-color:white;
-
-margin-bottom:20px;
-
-text-shadow:0 0 10px rgba(255,255,255,.6);
-
-}
-
-#typing{
-
-font-size:16px;
-
-line-height:1.8;
-
-color:white;
-
-text-align:left;
-
-white-space:pre-wrap;
-
-min-height:320px;
-
-}
-
-@media(max-width:480px){
-
-.card{
-max-width:330px;
-padding:20px;
-}
-
-h1{
-font-size:24px;
-}
-
-#typing{
-font-size:15px;
-}
-
-}
-
-.heart{
-
-position:absolute;
-
-bottom:-30px;
-
-font-size:24px;
-
-animation:floatUp linear forwards;
-
-}
-
-@keyframes floatUp{
-
-0%{
-transform:translateY(0) scale(.5);
-opacity:0;
-}
-
-20%{
-opacity:1;
-}
-
-100%{
-transform:translateY(-120vh) scale(1.4);
-opacity:0;
-}
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="card">
-
-<h1>❤️ Happy 4th Anniversary ❤️</h1>
-
-<p id="typing"></p>
-
-</div>
-
-<audio id="music" autoplay loop>
-<source src="My Forever Starts.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-
-const message=`Dear April Joy Esperila Contiga,
-
-Happy 4th Anniversary, My Love! ❤️
-
-Four wonderful years have passed, and every moment with you has been the happiest chapter of my life.
-
-Thank you for staying beside me through every challenge, every success, every smile, and every tear.
-
-You are my greatest blessing, my best friend, my safe place, and the love of my life.
-
-No matter where life takes us, I promise to always choose you, respect you, support you, and love you with all my heart.
-
-Thank you for making my world brighter just by being in it.
-
-May God continue to bless our relationship and guide us as we chase our dreams together.
-
-Happy 4th Anniversary, Mahal.
-
-I love you more than words can ever express.
-
-Forever and Always,
-
-❤️ Jojo ❤️`;
-
-let i=0;
-
-function typeWriter(){
-
-if(i<message.length){
-
-document.getElementById("typing").innerHTML+=message.charAt(i);
-
-i++;
-
-setTimeout(typeWriter,35);
-
-}
-
-}
-
-window.onload=function(){
-
-typeWriter();
-
-// Try to play music
-const music=document.getElementById("music");
-
-music.play().catch(()=>{
-
-document.body.addEventListener("click",()=>{
-
-music.play();
-
-},{once:true});
-
-});
-
-};
-
-// Floating Hearts
-
-setInterval(()=>{
-
-const heart=document.createElement("div");
-
-heart.className="heart";
-
-const hearts=["❤️","💖","💕","💗","💘"];
-
-heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];
-
-heart.style.left=Math.random()*100+"vw";
-
-heart.style.animationDuration=(4+Math.random()*4)+"s";
-
-document.body.appendChild(heart);
-
-setTimeout(()=>{
-
-heart.remove();
-
-},8000);
-
-},450);
-
-</script>
-
-</body>
+  
+@keyframes fade{  
+from{ opacity:0; transform:translateY(30px); }  
+to{ opacity:1; transform:translateY(0); }  
+}  
+  
+h1{  
+font-size:28px;  
+color:white;  
+margin-bottom:20px;  
+text-shadow:0 0 10px rgba(255,255,255,.6);  
+}  
+  
+#typing{  
+font-size:16px;  
+line-height:1.8;  
+color:white;  
+text-align:left;  
+white-space:pre-wrap;  
+min-height:320px;  
+}  
+  
+@media(max-width:480px){  
+.card{ max-width:330px; padding:20px; }  
+h1{ font-size:24px; }  
+#typing{ font-size:15px; }  
+}  
+  
+.heart{  
+position:absolute;  
+bottom:-30px;  
+font-size:24px;  
+animation:floatUp linear forwards;  
+}  
+  
+@keyframes floatUp{  
+0%{ transform:translateY(0) scale(.5); opacity:0; }  
+20%{ opacity:1; }  
+100%{ transform:translateY(-120vh) scale(1.4); opacity:0; }  
+}  
+  
+</style>  
+</head>  
+
+<body>  
+
+<div class="card">  
+<h1>❤️ Happy 4th Anniversary ❤️</h1>  
+<p id="typing"></p>  
+</div>  
+
+<audio id="music" autoplay loop>  
+<source src="My Forever Starts.mp3" type="audio/mpeg">  
+</audio>  
+
+<script>  
+
+const message=`Dear April Joy Esperila Contiga,  
+
+Happy 4th Anniversary, My Love! ❤️  
+
+Four wonderful years have passed, and every moment with you has been the happiest chapter of my life.  
+
+Thank you for staying beside me through every challenge, every success, every smile, and every tear.  
+
+You are my greatest blessing, my best friend, my safe place, and the love of my life.  
+
+No matter where life takes us, I promise to always choose you, respect you, support you, and love you with all my heart.  
+
+Thank you for making my world brighter just by being in it.  
+
+May God continue to bless our relationship and guide us as we chase our dreams together.  
+
+Happy 4th Anniversary, Mahal.  
+
+I love you more than words can ever express.  
+
+Forever and Always,  
+
+❤️ Jojo ❤️`;  
+
+let i=0;  
+
+function typeWriter(){  
+if(i<message.length){  
+document.getElementById("typing").innerHTML += message.charAt(i);  
+i++;  
+setTimeout(typeWriter,35);  
+}  
+}  
+
+window.onload=function(){  
+typeWriter();  
+
+const music=document.getElementById("music");  
+music.play().catch(()=>{  
+document.body.addEventListener("click",()=>{  
+music.play();  
+},{once:true});  
+});  
+};  
+
+setInterval(()=>{  
+const heart=document.createElement("div");  
+heart.className="heart";  
+const hearts=["❤️","💖","💕","💗","💘"];  
+heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];  
+heart.style.left=Math.random()*100+"vw";  
+heart.style.animationDuration=(4+Math.random()*4)+"s";  
+document.body.appendChild(heart);  
+setTimeout(()=>{ heart.remove(); },8000);  
+},450);  
+
+</script>  
+
+</body>  
 </html>
