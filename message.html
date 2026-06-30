@@ -59,19 +59,15 @@ animation:move2 8s infinite alternate;
 100%{ transform:translate(-120px,-120px); }  
 }  
 
-/* LONG NOTE IMAGE - NO BOX, NO SHADOW */
+/* NOTE BACKGROUND */
 .card{  
 position:relative;  
 z-index:5;  
 width:100%;  
 max-width:360px;  
 height:780px;  
-
 background:url("note.png") center center/cover no-repeat;  
-
 padding:70px 40px;  
-text-align:center;  
-
 display:flex;  
 flex-direction:column;  
 justify-content:flex-start;  
@@ -82,7 +78,6 @@ h1{
 font-size:24px;  
 color:black;  
 margin-bottom:15px;  
-text-shadow:none;  
 }  
 
 #typing{  
@@ -91,30 +86,76 @@ line-height:1.6;
 color:black;  
 text-align:left;  
 white-space:pre-wrap;  
-text-shadow:none;  
 overflow-y:auto;  
-max-height:650px;  
-padding-right:5px;  
+max-height:520px;  
 }  
 
-@media(max-width:480px){  
-.card{ max-width:330px; height:700px; padding:60px 30px; }  
-h1{ font-size:20px; }  
-#typing{ font-size:14px; }  
-}  
+/* 🔐 FINGERPRINT BUTTON */
+.fingerprint-container{
+margin-top:15px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:8px;
+}
 
-.heart{  
-position:absolute;  
-bottom:-30px;  
-font-size:24px;  
-animation:floatUp linear forwards;  
-}  
+.fingerprint{
+width:70px;
+height:70px;
+border-radius:50%;
+border:2px solid rgba(0,0,0,0.4);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+color:black;
+cursor:pointer;
+position:relative;
+animation:pulse 1.5s infinite;
+user-select:none;
+}
 
-@keyframes floatUp{  
-0%{ transform:translateY(0) scale(.5); opacity:0; }  
-20%{ opacity:1; }  
-100%{ transform:translateY(-120vh) scale(1.4); opacity:0; }  
-}  
+.fingerprint::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+border-radius:50%;
+border:2px solid rgba(0,0,0,0.2);
+animation:ring 2s infinite;
+}
+
+@keyframes pulse{
+0%{ transform:scale(1); }
+50%{ transform:scale(1.05); }
+100%{ transform:scale(1); }
+}
+
+@keyframes ring{
+0%{ transform:scale(1); opacity:1; }
+100%{ transform:scale(1.8); opacity:0; }
+}
+
+.fp-text{
+font-size:12px;
+color:black;
+}
+
+.progress{
+width:120px;
+height:6px;
+background:rgba(0,0,0,0.2);
+border-radius:10px;
+overflow:hidden;
+display:none;
+}
+
+.progress-bar{
+height:100%;
+width:0%;
+background:black;
+transition:width 5s linear;
+}
 
 </style>  
 </head>  
@@ -124,10 +165,20 @@ animation:floatUp linear forwards;
 <div class="card">  
 <h1>❤️ Happy 4th Anniversary ❤️</h1>  
 <p id="typing"></p>  
+
+<!-- FINGERPRINT SECTION -->
+<div class="fingerprint-container">
+<div class="fingerprint" id="finger">👆</div>
+<div class="fp-text">Your Finger Print</div>
+<div class="progress" id="progress">
+<div class="progress-bar" id="bar"></div>
+</div>
+</div>
+
 </div>  
 
-<audio id="music" autoplay loop>  
-<source src="Choose You Every Day.mp3" type="audio/mpeg">  
+<audio id="music" loop>  
+<source src="My Forever Starts.mp3" type="audio/mpeg">  
 </audio>  
 
 <script>  
@@ -148,7 +199,7 @@ Thank you for making my world brighter just by being in it.
 
 May God continue to bless our relationship and guide us as we chase our dreams together.  
 
-Happy 4th Anniversary, Love. 
+Happy 4th Anniversary, Mahal.  
 
 I love you more than words can ever express.  
 
@@ -176,6 +227,44 @@ music.play();
 },{once:true});  
 });  
 };  
+
+/* 🔐 LONG PRESS LOGIC */
+const finger=document.getElementById("finger");
+const bar=document.getElementById("bar");
+const progress=document.getElementById("progress");
+
+let timer;
+let holding=false;
+
+finger.addEventListener("touchstart",startHold);
+finger.addEventListener("mousedown",startHold);
+
+finger.addEventListener("touchend",cancelHold);
+finger.addEventListener("mouseup",cancelHold);
+finger.addEventListener("mouseleave",cancelHold);
+
+function startHold(){
+holding=true;
+progress.style.display="block";
+bar.style.width="0%";
+
+setTimeout(()=>{
+bar.style.width="100%";
+},50);
+
+timer=setTimeout(()=>{
+window.location.href="video.html";
+},5000);
+}
+
+function cancelHold(){
+if(!holding) return;
+holding=false;
+
+clearTimeout(timer);
+bar.style.width="0%";
+progress.style.display="none";
+}
 
 setInterval(()=>{  
 const heart=document.createElement("div");  
